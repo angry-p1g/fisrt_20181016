@@ -1,0 +1,19 @@
+https://blog.csdn.net/winter_chen001/article/details/77249029（1.5版springboot整合mybatis）
+1、使用了pageHelper工具、与mybatis自动生成代码的插件
+2、项目不使用application.properties文件 而使用更加简洁的application.yml文件
+3、mybatis自动生成代码的插件配置(注意！！！同一张表一定不要运行多次，因为mapper的映射文件中会生成多次的代码，导致报错，切记
+4、添加事务控制
+
+问题：
+
+1、如何查看本地mysql的用户名密码？ （本地mysql安装，解压包安装各种问题。）mysql 密码1234（修改密码 https://jingyan.baidu.com/article/454316ab4e9e65f7a7c03ad1.html）
+---Lost connection to MySQL server at 'reading initial communication packet', system error: 0
+2、mapper注入不了的情况，请检查版本，当前博客的搭建方法只适合1.5.*版本的（注入失败），需要修改成2.0 的 版本不一致。
+3、Factory method 'dataSource' threw exception; nested exception is java.lang.NoClassDefFoundError: org/springframework/boot/bind/RelaxedDataBinder（org.springframework.boot.bind 包已经删掉了,导致RelaxedPropertyResolver这个方法已经不可用了.）
+4、@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class}) 这个注解不能配置: 是排除自动注入 导致mapper注入不进去
+5、Failed to bind properties under 'spring.datasource.type' to java.lang.Class  --- 1.5 的项目可以使用,,2.0 不行
+6、Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.  --https://www.jianshu.com/p/836d455663da
+
+
+
+https://www.cnblogs.com/baoyi/p/SpringBoot_YML.html
