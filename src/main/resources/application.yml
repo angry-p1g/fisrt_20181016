@@ -6,17 +6,17 @@ spring:
     profiles:
         active: prod
     datasource:
-        name: mysql_test
-#       type: com.alibaba.druid.pool.DruidDataSource  #1.5 的项目可以使用,,2.0 不行，删除默认是tomcat-jdbc
-        #druid相关配置
-        druid:
+#        name: mysql_test
+##       type: com.alibaba.druid.pool.DruidDataSource  #1.5 的项目可以使用,,2.0 不行，删除默认是tomcat-jdbc
+#        #druid相关配置
+#        druid:
           #监控统计拦截的filters
           filters: stat
           driver-class-name: com.mysql.jdbc.Driver
           #基本属性
-          url: jdbc:mysql://127.0.0.1:3306/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          url: jdbc:mysql://127.0.0.1:3306/jkl?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
           username: root
-          password: 1234
+          password: root
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
@@ -36,14 +36,38 @@ spring:
           max-pool-prepared-statement-per-connection-size: 20
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
 mybatis:
-  mapper-locations: classpath:mapping/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
-  type-aliases-package: com.gq.model  # 注意：对应实体类的路径
+  mapper-locations: classpath:mapping/*/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.gq.shiro.model  # 注意：对应实体类的路径
 
+
+logging:
+   pattern:
+      console: "%boldMagenta(%d{yyyy-MM-dd HH:mm:ss})  [%p]  %highlight(%C:%L)  : %m %n"
+   path: E:/Projects/self/fisrt_20181016/log
+   file: E:/Projects/self/fisrt_20181016/log/info.log
+   level:
+      root: info
 #pagehelper
 pagehelper:
     helperDialect: mysql
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
-    returnPageInfo: check
+#    returnPageInfo: check
+
+
+jedis :
+  pool :
+    host : 127.0.0.1
+    port : 6379
+    config :
+      maxTotal: 100
+      maxIdle: 50   #jedis最大空闲连接数
+      maxWaitMillis : 100000
+      testOnBorrow: true  #从池中获取连接的时候，是否进行有效检查
+      testOnReturn: true  #归还连接的时候，是否进行有效检查
+
+#加载Mybatis配置文件
+#mybatis.config-locations=classpath:mybatis/mybatis-config.xml
+#mybatis.mapper-locations = classpath:mybatis/mappers/*Mapper.xml
 

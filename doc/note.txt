@@ -3,6 +3,12 @@ https://blog.csdn.net/winter_chen001/article/details/77249029（1.5版springboot
 2、项目不使用application.properties文件 而使用更加简洁的application.yml文件
 3、mybatis自动生成代码的插件配置(注意！！！同一张表一定不要运行多次，因为mapper的映射文件中会生成多次的代码，导致报错，切记
 4、添加事务控制
+5、集成redis  （https://blog.csdn.net/plei_yue/article/details/79362372）
+6、添加基本的日志配置
+7、工具类
+8、集成shiro：https://www.cnblogs.com/kibana/p/8953566.html
+9、测试事务回滚结果（事务管理可以能与项目分层有关，事务放在控制层，出现异常不回滚。若把事务放到业务层，事务正常回顾。测试结果是这样，具体原因待排查）
+正常都是在业务层抛出异常，在控制层捕获异常
 
 问题：
 
@@ -13,7 +19,10 @@ https://blog.csdn.net/winter_chen001/article/details/77249029（1.5版springboot
 4、@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class}) 这个注解不能配置: 是排除自动注入 导致mapper注入不进去
 5、Failed to bind properties under 'spring.datasource.type' to java.lang.Class  --- 1.5 的项目可以使用,,2.0 不行
 6、Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.  --https://www.jianshu.com/p/836d455663da
+7、org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration'（pageHelper.jar版本与MyBatis版本不兼容）
 
+8、org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.gq.jkl.mapper.JklUserMapper.insert
+（需要配置mybati-mapping配置文件路径）
 
-
+RestTemplate类使用的理解 https://blog.csdn.net/madmk/article/details/76431486
 https://www.cnblogs.com/baoyi/p/SpringBoot_YML.html
